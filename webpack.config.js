@@ -1,8 +1,8 @@
 /*
  * @Author: liujie3612
  * @Date:   2018-01-12 21:29:10
- * @Last Modified by:   liujie3612
- * @Last Modified time: 2018-01-12 22:01:49
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2018-01-18 15:29:56
  */
 var path = require('path')
 var webpack = require('webpack')
@@ -93,6 +93,8 @@ module.exports = {
     colors: true, //终端中输出结果为彩色
     historyApiFallback: true, //不跳转
     inline: true, //实时刷新
-    hot: true // 使用热加载插件 HotModuleReplacementPlugin
+    hot: true, // 使用热加载插件 HotModuleReplacementPlugin
+    disableHostCheck: true,
+    host: '0.0.0.0'
   }
 }

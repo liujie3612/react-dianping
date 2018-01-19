@@ -30,7 +30,7 @@ class App extends React.Component {
     if (cityName == null) {
       cityName = '北京'
     }
-    // cityName = cityName ?  cityName : '北京'
+
     //传到redux里去
     this.props.userInfoActions.update({
       cityName: cityName

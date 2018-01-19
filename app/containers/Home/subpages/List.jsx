@@ -3,6 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { getListData } from '../../../fetch/home/home.js'
 
 import ListComponent from '../../../components/List'
+import LoadMore from '../../../components/LoadMore'
 import './style.less'
 
 class List extends React.Component {
@@ -12,9 +13,11 @@ class List extends React.Component {
     this.state = {
       data: [], //存储列表数据
       hasMore: false, //是否还有更多的数据
-      page : 1 //首页为0，记录下一页的页码
+      page : 1, //首页为0，记录下一页的页码
+      isLoadingMore: false //
     }
   }
+
   render() {
     return (
       <div>
@@ -22,9 +25,13 @@ class List extends React.Component {
         {
           this.state.data.length ? <ListComponent data={this.state.data} /> : <div>加载中...</div>
         }
+        {
+          this.state.hasMore ? <LoadMore isLoadingMore={this.state.isLoadingMore} loadMoreFn={this.loadMoreData.bind(this)} /> : <div></div>
+        }
       </div>
     )
   }
+
   componentDidMount() {
     this.loadFirstPageData()
   }
@@ -37,6 +44,21 @@ class List extends React.Component {
     this.resultHandle(result)
   }
 
+  //加载更多的数据
+  loadMoreData() {
+    this.setState({
+      isLoadingMore: true
+    })
+    const cityName = this.props.cityName
+    const page = this.state.page
+    const result = getListData(cityName, page)
+    this.resultHandle(result)
+    this.setState({
+      page: page + 1,
+      isLoadingMore: false
+    })
+  }
+
   //数据处理
   resultHandle(result) {
     result.then((res) => {
@@ -47,7 +69,7 @@ class List extends React.Component {
         const data = json.data
         this.setState({
           hasMore: hasMore,
-          data: data
+          data: this.state.data.concat(data) //不能每次都覆盖,每次获取到的数据要拼接起来
         })
       }
     })

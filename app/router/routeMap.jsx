@@ -4,8 +4,8 @@ import { Router, Route, IndexRoute } from 'react-router'
 import App from '../containers'
 import Home from '../containers/Home'
 import City from '../containers/City'
+import Search from '../containers/Search'
 // import User from '../containers/User'
-// import Search from '../containers/Search'
 // import Detail from '../containers/Detail'
 // import NotFound from '../containers/404'
 
@@ -19,6 +19,7 @@ class RouterMap extends React.Component {
         <Route path='/' component={App}>
           <IndexRoute component={Home} />
           <Route path='/city' component={City} />
+          <Route path='/search/:type(/:keyword)' component={Search} />
         </Route>
       </Router>
     )

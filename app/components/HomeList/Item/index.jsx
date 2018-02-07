@@ -1,6 +1,6 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 import './style.less'
 
@@ -12,6 +12,7 @@ class ListItem extends React.Component {
 
   render() {
     const data = this.props.data
+    // console.log(data)
     return (
       <div className="list-item clear-fix">
         <Link to={'/detail/' + data.id}>

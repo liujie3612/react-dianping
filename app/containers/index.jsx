@@ -2,6 +2,8 @@ import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
+
 import LocalStore from '../util/localStore'
 import { CITYNAME } from '../config/localStoreKey'
 import * as userInfoActionsFromOtherFile from '../actions/userinfo'
@@ -56,7 +58,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(App))

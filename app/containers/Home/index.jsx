@@ -1,6 +1,7 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 
 import HomeHeader from '../../components/HomeHeader'
@@ -16,7 +17,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <HomeHeader cityName={this.props.userinfo.cityName}></HomeHeader>
+        <HomeHeader cityName={this.props.userinfo.cityName} history={this.props.history} />
         <Category></Category>
         <div style={{ height: '15px' }}></div>
         <Ad />
@@ -38,7 +39,7 @@ function mapDispatchToProps(dispatch) {
   return {
   }
 }
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home)
+)(Home))

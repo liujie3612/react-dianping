@@ -1,6 +1,7 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import ListCompoent from '../../../components/HomeList'
 import LoadMore from '../../../components/LoadMore'
@@ -123,7 +124,7 @@ function mapDispatchToProps(dispatch) {
   return {
   }
 }
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(SearchList)
+)(SearchList))

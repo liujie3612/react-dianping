@@ -2,7 +2,7 @@ import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { hashHistory } from 'react-router'
+import { withRouter } from 'react-router-dom'
 
 import CityHeader from "../../components/CityHeader";
 import CurrentCity from "../../components/CurrentCity";
@@ -44,14 +44,8 @@ class City extends React.Component {
     localStore.setItem(CITYNAME, newCity)
 
     // 跳转页面
-    hashHistory.push('/')
-
+    this.props.history.replace('/')
   }
-
-  // componentDidMount() {
-  //   console.log(this.props.userinfo)
-  //   console.log(this.props.userInfoActions)
-  // }
 }
 
 // -------------------redux react 绑定--------------------
@@ -68,7 +62,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(City)
+)(City))

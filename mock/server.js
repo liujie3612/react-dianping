@@ -63,6 +63,54 @@ router.get('/api/search/:page/:city/:category', function* (next) {
   this.body = searchListData
 })
 
+// 详情页 - 商户信息
+const detailInfo = require('./detail/info.js')
+router.get('/api/detail/info/:id', function* (next) {
+  console.log('详情页 - 商户信息')
+
+  const params = this.params
+  const id = params.id
+
+  console.log('商户id: ' + id)
+
+  this.body = detailInfo
+})
+// 详情页 - 用户评论
+const detailComment = require('./detail/comment.js')
+router.get('/api/detail/comment/:page/:id', function* (next) {
+  console.log('详情页 - 用户点评')
+
+  const params = this.params
+  const page = params.page
+  const id = params.id
+
+  console.log('商户id: ' + id)
+  console.log('当前页数: ' + page)
+
+  this.body = detailComment
+})
+
+// 订单列表
+const orderList = require('./orderList/orderList.js')
+router.get('/api/orderlist/:username', function* (next) {
+  console.log('订单列表')
+  const params = this.params
+  const username = params.username
+  console.log('用户名：' + username)
+
+  this.body = orderList
+})
+
+// 提交评论
+router.post('/api/submitComment', function* (next) {
+  console.log('提交评论')
+  // 获取参数
+  this.body = {
+    errno: 0,
+    msg: 'ok'
+  }
+})
+
 // 开始服务并生成路由
 app.use(router.routes())
   .use(router.allowedMethods());
